@@ -6,7 +6,7 @@
 
 const CustomerList = require('../controllers/CustomerSaver.js');
 
-var customersList = new CustomerList().getInstance();
+var customersData = new CustomerList().getInstance();
 
 module.exports = class CustomerDeleter {
 
@@ -27,7 +27,7 @@ module.exports = class CustomerDeleter {
                 });
 
             // Checked if a Customer with the Email given exists
-            var customerSearchedIndex = customersList.findIndex(customer => {
+            var customerSearchedIndex = customersData.customersList.findIndex(customer => {
                 return customer.email == searchedCustomerEmail;
             });
 
@@ -38,7 +38,7 @@ module.exports = class CustomerDeleter {
                 });
 
             // Remove the requested Customer
-            delete customersList[customerSearchedIndex];
+            delete customersData.customersList[customerSearchedIndex];
 
             return res.send({
                 Result: 'Success',

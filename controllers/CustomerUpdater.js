@@ -6,7 +6,7 @@
 
 const CustomerList = require('../controllers/CustomerSaver.js');
 
-var customersList = new CustomerList().getInstance();
+var customersData = new CustomerList().getInstance();
 
 module.exports = class CustomerUpdater {
  
@@ -31,7 +31,7 @@ module.exports = class CustomerUpdater {
                 });
 
             // Checked if a Customer with the Email given exists
-            var customerSearchedIndex = customersList.findIndex(customer => {
+            var customerSearchedIndex = customersData.customersList.findIndex(customer => {
                 return customer.email == searchedCustomerEmail;
             });
 
@@ -49,10 +49,10 @@ module.exports = class CustomerUpdater {
                 });
 
             // Update the properties for the requested Customer
-            customersList[customerSearchedIndex].name = newName;
-            customersList[customerSearchedIndex].surname = newSurname;
-            customersList[customerSearchedIndex].email = newEmail;
-            customersList[customerSearchedIndex].birthdate = newBirthdate;
+            customersData.customersList[customerSearchedIndex].name = newName;
+            customersData.customersList[customerSearchedIndex].surname = newSurname;
+            customersData.customersList[customerSearchedIndex].email = newEmail;
+            customersData.customersList[customerSearchedIndex].birthdate = newBirthdate;
 
             return res.send({
                 Result: 'Success',

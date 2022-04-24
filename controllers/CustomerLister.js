@@ -6,7 +6,7 @@
 
 const CustomerList = require('../controllers/CustomerSaver.js');
 
-var customersList = new CustomerList().getInstance();
+var customersData = new CustomerList().getInstance();
 
 module.exports = class CustomerLister {
  
@@ -21,7 +21,7 @@ module.exports = class CustomerLister {
             return res.send({
                 Result: 'Success',
                 Message: 'Customers listed.',
-                Data: JSON.stringify(customersList)
+                Data: JSON.stringify(customersData.customersList)
             });
 
         } catch {
@@ -51,9 +51,15 @@ module.exports = class CustomerLister {
                 });
 
             // Search and return the requested Customer
-            const customerSearched = customersList.find(customer => {
+            const customerSearched = customersData.customersList.find(customer => {
                 return customer.email == searchedCustomerEmail;
             });
+
+            if(!customerSearched)
+                return res.send({
+                    Result: 'Error',
+                    Message: 'Customer doesn\'t exists.'
+                });
 
             return res.send({
                 Result: 'Success',

@@ -7,7 +7,7 @@
 const Customer = require('../models/Customer.js');
 const CustomerList = require('../controllers/CustomerSaver.js');
 
-var customersList = new CustomerList().getInstance();
+var customersData = new CustomerList().getInstance();
 
 module.exports = class CustomerCreator {
 
@@ -36,7 +36,7 @@ module.exports = class CustomerCreator {
                 });
 
             // Checked if a Customer with the Email given already exists
-            const customerExists = customersList.find(customer => {
+            const customerExists = customersData.customersList.find(customer => {
                 return customer.email == newEmail;
             });
 
@@ -54,7 +54,7 @@ module.exports = class CustomerCreator {
                 newBirthdate
             );
 
-            customersList.push(newCustomer);
+            customersData.customersList.push(newCustomer);
 
             return res.send({
                 Result: 'Success',

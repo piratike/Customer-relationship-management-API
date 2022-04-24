@@ -18,14 +18,14 @@ module.exports = class Singleton {
 
     constructor() {
 
-        if(!this.instance)
-            this.instance = new CustomerSaver();
+        if(!Singleton.instance)
+            Singleton.instance = new CustomerSaver();
 
     }
 
     getInstance() {
 
-        return this.instance;
+        return Singleton.instance;
 
     }
 
