@@ -26,6 +26,13 @@ module.exports = class CustomerDeleter {
                     Message: 'Email is needed but not provided.'
                 });
 
+            // Checked if the Customers List Data is empty
+            if(!customersData.customersList.length)
+                return res.send({
+                    Result: 'Error',
+                    Message: 'No Customers currently stored.'
+                });
+
             // Checked if a Customer with the Email given exists
             var customerSearchedIndex = customersData.customersList.findIndex(customer => {
                 return customer.email == searchedCustomerEmail;
@@ -38,7 +45,7 @@ module.exports = class CustomerDeleter {
                 });
 
             // Remove the requested Customer
-            delete customersData.customersList[customerSearchedIndex];
+            customersData.customersList.splice(customerSearchedIndex, 1);
 
             return res.send({
                 Result: 'Success',
