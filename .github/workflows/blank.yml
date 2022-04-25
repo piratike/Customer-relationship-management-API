@@ -24,7 +24,13 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
 
-      # Runs a single command using the runners shell
-      - name: Run the test to check everything is ok
-        run: npm test
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: npm ci
+      - run: npm run prettier
+      - run: npm run linter
+      - run: npm test
